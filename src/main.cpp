@@ -5,19 +5,24 @@
 #include <scanner.hpp>
 #include <console.hpp>
 #include <checks.hpp>
+#include <parser.hpp>
+#include <graph.hpp>
 using namespace std;
 
 int main(int argCount, char *args[])
 {
     try
     {
-        string name = getName(argCount,args);
+        string name = getName(argCount, args);
         string code = getCode(name);
         vector<Token> token = scan(code);
         checkBrackets(token);
         checkStart(token);
-        for (Token t : token){
-            cout << t.data << ' ';
+        vector<unique_ptr<Statement>> v = parse(token);
+        Printer p;
+        for (auto &t : v)
+        {
+            accept(t.get(),p);
         }
     }
     catch (const std::exception &e)
