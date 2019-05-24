@@ -4,6 +4,8 @@
 #include <scanner.hpp>
 #include <vector>
 #include <memory>
+#include <map>
+#include <memory.hpp>
 class TokenList
 {
     const vector<Token> &token;
@@ -14,4 +16,5 @@ public:
     Token next();
     bool isEmpty();
 };
-vector<unique_ptr<Statement>> parse(const vector<Token> &token);
+vector<unique_ptr<Statement>> parse(const vector<Token> &token, map<string,unique_ptr<Stack>> &stack);
+map<string,unique_ptr<Stack>> generateStackMap(const vector<Token> &token);
