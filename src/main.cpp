@@ -7,6 +7,8 @@
 #include <checks.hpp>
 #include <parser.hpp>
 #include <graph.hpp>
+#include <visitor.hpp>
+#include <memory.hpp>
 using namespace std;
 
 int main(int argCount, char *args[])
@@ -18,11 +20,17 @@ int main(int argCount, char *args[])
         vector<Token> token = scan(code);
         checkBrackets(token);
         checkStart(token);
-        vector<unique_ptr<Statement>> v = parse(token);
+        map<string, unique_ptr<Stack>> stackmap = generateStackMap(token);
+        vector<unique_ptr<Statement>> v = parse(token, stackmap);
         Printer p;
         for (auto &t : v)
         {
-            accept(t.get(),p);
+            t->accept(p);
+        }
+        Runner r;
+        for (auto &t : v)
+        {
+            t->accept(r);
         }
     }
     catch (const std::exception &e)
