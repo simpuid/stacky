@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// console functions
 memseg Console::read()
 {
     if (empty)
@@ -27,6 +28,7 @@ void Console::push(memseg data)
     cout << (char)data;
 }
 
+// add function
 void Add::push(memseg data)
 {
     if (isEmpty())
@@ -39,6 +41,8 @@ void Add::push(memseg data)
         push(r);
     }
 }
+
+// and function
 void And::push(memseg data)
 {
     if (isEmpty())
@@ -51,6 +55,8 @@ void And::push(memseg data)
         push(r);
     }
 }
+
+// or function
 void Or::push(memseg data)
 {
     if (isEmpty())
@@ -63,19 +69,26 @@ void Or::push(memseg data)
         push(r);
     }
 }
+
+// rightshift function
 void RightShift::push(memseg data)
 {
     vec.push_back(data >> 1);
 }
+
+// leftshift function
 void LeftShift::push(memseg data)
 {
     vec.push_back(data << 1);
 }
+
+// invert function
 void Invert::push(memseg data)
 {
     vec.push_back(~data);
 }
 
+// trash bin function(does nothing)
 memseg Bin::read()
 {
     return 0;

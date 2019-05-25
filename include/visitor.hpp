@@ -1,7 +1,7 @@
 #pragma once
 #include <graph.hpp>
-#include <memory.hpp>
 
+// abstract Visitor class
 class Visitor
 {
 public:

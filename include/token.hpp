@@ -2,6 +2,7 @@
 #include <string>
 using namespace std;
 
+// all the types of tokens
 enum class Type
 {
     Move,
@@ -14,6 +15,7 @@ enum class Type
     Number
 };
 
+// token class which contains all the data
 class Token
 {
 public:

@@ -7,6 +7,7 @@ SetStack::SetStack(unique_ptr<StackBase> &stack) : stack(stack){};
 
 SetNumber::SetNumber(memseg number) : number(number) {}
 
+// accept method for visitor pattern
 void Statement::accept(Visitor &v)
 {
     v.visit(*this);

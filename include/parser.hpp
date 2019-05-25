@@ -5,6 +5,7 @@
 #include <memory>
 #include <map>
 #include <memory.hpp>
+// tokenlist class is used in recursive function to supply token
 class TokenList
 {
 public:
@@ -14,5 +15,6 @@ public:
     Token next();
     bool isEmpty();
 };
+
 vector<unique_ptr<Statement>> parse(const vector<Token> &token, map<string, unique_ptr<StackBase>> &stack);
 map<string, unique_ptr<StackBase>> generateStackMap(const vector<Token> &token);

@@ -1,7 +1,8 @@
 #pragma once
 #include <visitor.hpp>
 #include <vector>
-#include <memory>
+
+// interpreter class
 class Interpreter : public Visitor
 {
     StackBase *source;

@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
-#include <map>
 using namespace std;
 typedef unsigned char memseg;
 
+// base class for all stack based object
 class StackBase
 {
 public:
@@ -13,6 +13,7 @@ public:
     virtual void push(memseg data)=0;
 };
 
+// normal user defined stack
 class Stack : public StackBase
 {
 public:
@@ -23,6 +24,7 @@ public:
     virtual void push(memseg data);
 };
 
+// special stack to store the number
 class Number : public StackBase
 {
 public:

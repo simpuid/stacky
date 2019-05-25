@@ -1,4 +1,6 @@
 #include <memory.hpp>
+
+// Stack funtions
 memseg Stack::read()
 {
     return (vec.size() != 0) ? vec[vec.size() - 1] : 0;
@@ -17,6 +19,7 @@ void Stack::push(memseg data)
     vec.push_back(data);
 }
 
+// Number functions
 memseg Number::read()
 {
     return value;
