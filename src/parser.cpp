@@ -1,7 +1,6 @@
 #include <parser.hpp>
 #include <sstream>
 #include <error.hpp>
-#include <iostream>
 #include <special.hpp>
 
 // TokenList functions
@@ -64,16 +63,16 @@ void handleOperator(Token tt, vector<unique_ptr<Statement>> &list, TokenList &tL
             list.push_back(make_unique<Operator>(opList, stack.find(t.data)->second));
             return;
         default:
-        // next token is neither an operator nor a stack, so error
+            // next token is neither an operator nor a stack, so error
             stringstream msg;
-            msg << "unexpected token " << t.data << " line:" << t.line << " column:" << t.column << " after operator";
+            msg << "unexpected token " << t << " after operator " << tt;
             error(msg.str());
-            break;
+            return;
         }
     }
     // tokenlist ran out of tokens without the terminating stack token, so error
     stringstream msg;
-    msg << "no stack specified after operator " << tt.data << " line:" << tt.line << " column:" << tt.column;
+    msg << "no stack specified after operator " << tt;
     error(msg.str());
 }
 
@@ -135,7 +134,7 @@ void checkBrackets(const vector<Token> &token)
         stream << "parser error";
         for (Token t : b)
         {
-            stream << "\nunmatched bracket '" << t.data << "' at line:" << t.line << " column:" << t.column;
+            stream << "\nunmatched bracket '" << t;
         }
         error(stream.str());
     }

@@ -23,4 +23,5 @@ public:
     string data;
     int line;
     int column;
+    friend ostream &operator<<(ostream &out, const Token &token);
 };
