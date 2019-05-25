@@ -7,10 +7,11 @@ using namespace std;
 
 enum class Operation
 {
-    Move,
-    Copy
+    Move,Copy
 };
+
 class Visitor;
+
 class Statement
 {
 public:
@@ -21,15 +22,16 @@ class Operator : public Statement
 {
 public:
     vector<Operation> operations;
-    unique_ptr<Stack> &target;
-    Operator(vector<Operation> operations, unique_ptr<Stack> &target);
+    unique_ptr<StackBase> &target;
+    Operator(vector<Operation> operations, unique_ptr<StackBase> &target);
     void accept(Visitor &v);
 };
+
 class SetStack : public Statement
 {
 public:
-    unique_ptr<Stack> &stack;
-    SetStack(unique_ptr<Stack> &stack);
+    unique_ptr<StackBase> &stack;
+    SetStack(unique_ptr<StackBase> &stack);
     void accept(Visitor &v);
 };
 
@@ -40,12 +42,14 @@ public:
     SetNumber(memseg number);
     void accept(Visitor &v);
 };
+
 class ZeroBlock : public Statement
 {
 public:
     vector<unique_ptr<Statement>> statements;
     void accept(Visitor &v);
 };
+
 class EmptyBlock : public Statement
 {
 public:

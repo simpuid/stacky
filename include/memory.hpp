@@ -1,24 +1,19 @@
 #pragma once
 #include <vector>
 #include <map>
-
 using namespace std;
-typedef char memseg;
-class Source
+typedef unsigned char memseg;
+
+class StackBase
 {
 public:
-    virtual memseg read() = 0;
-    virtual void pop() = 0;
-    virtual bool isEmpty() = 0;
+    virtual memseg read()=0;
+    virtual void pop()=0;
+    virtual bool isEmpty()=0;
+    virtual void push(memseg data)=0;
 };
 
-class Target
-{
-public:
-    virtual void push(memseg data) = 0;
-};
-
-class Stack : public Source, Target
+class Stack : public StackBase
 {
 public:
     vector<memseg> vec;
@@ -28,11 +23,12 @@ public:
     virtual void push(memseg data);
 };
 
-class Number : public Source
+class Number : public StackBase
 {
 public:
     memseg value;
     memseg read();
     void pop();
     bool isEmpty();
+    void push(memseg data);
 };

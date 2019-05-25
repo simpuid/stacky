@@ -1,15 +1,30 @@
-#include <iostream>
 #include <string>
 #include <vector>
-#include <filehandle.hpp>
 #include <scanner.hpp>
 #include <console.hpp>
-#include <checks.hpp>
 #include <parser.hpp>
 #include <graph.hpp>
 #include <visitor.hpp>
 #include <memory.hpp>
+#include <fstream>
+#include <interpreter.hpp>
+
 using namespace std;
+
+string getName(int argCount, char *args[])
+{
+    if (argCount < 2)
+        error("less number of arguments");
+    return string(args[1]);
+}
+
+string getCode(const string& name)
+{
+    ifstream file(name);
+    if (!file)
+        error("can't read file: " + name);
+    return string((istreambuf_iterator<char>(file)), (istreambuf_iterator<char>()));
+}
 
 int main(int argCount, char *args[])
 {
@@ -18,24 +33,13 @@ int main(int argCount, char *args[])
         string name = getName(argCount, args);
         string code = getCode(name);
         vector<Token> token = scan(code);
-        checkBrackets(token);
-        checkStart(token);
-        map<string, unique_ptr<Stack>> stackmap = generateStackMap(token);
+        map<string, unique_ptr<StackBase>> stackmap = generateStackMap(token);
         vector<unique_ptr<Statement>> v = parse(token, stackmap);
-        Printer p;
-        for (auto &t : v)
-        {
-            t->accept(p);
-        }
-        Runner r;
-        for (auto &t : v)
-        {
-            t->accept(r);
-        }
+        
+        Interpreter i(v);
     }
     catch (const std::exception &e)
     {
-        cerr << "\nTerminated!" << endl;
         return -1;
     }
     return 0;

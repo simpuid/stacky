@@ -11,20 +11,6 @@ void error(string msg)
     close();
 }
 
-void log(string msg)
-{
-    stringstream ss;
-    ss << "\nLog: " << msg;
-    clog << ss.str();
-}
-
-void warn(string msg)
-{
-    stringstream ss;
-    ss << "\nWarning: " << msg;
-    cout << ss.str();
-}
-
 void close()
 {
     throw exception();

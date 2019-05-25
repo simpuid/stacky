@@ -4,18 +4,11 @@
 #include <console.hpp>
 using namespace std;
 
-Token::Token(Type type, string data, int line, int column) : type(type), data(data), line(line), column(column) {}
-
 static map<char, Type> lookup{{'>', Type::Move}, {'+', Type::Copy}, {'[', Type::ZeroStart}, {']', Type::ZeroEnd}, {'{', Type::EmptyStart}, {'}', Type::EmptyEnd}};
-
-void addToken(Type type, stringstream &ss, vector<Token> tokens, int line, int column)
-{
-    tokens.push_back(Token(type, ss.str(), line, column));
-}
 
 vector<Token> scan(const string &code)
 {
-    int line{1}, column{1}, pointer{0}, end{code.length()};
+    int line{1}, column{1}, pointer{0}, end{(int)code.length()};
     stringstream ss,msg;
     msg << "unexpected character";
     bool err = false;
@@ -25,7 +18,7 @@ vector<Token> scan(const string &code)
     };
     auto addToken = [&](Type type) {
         string value = ss.str();
-        tokens.push_back(Token(type, value, line, column - value.length() + 1));
+        tokens.push_back(Token{type, value, line, column - (int)value.length() + 1});
         clear();
     };
     auto isAlphabet = [&](int i) -> bool {

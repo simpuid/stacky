@@ -28,3 +28,6 @@ bool Number::isEmpty()
 void Number::pop()
 {
 }
+void Number::push(memseg data)
+{
+}

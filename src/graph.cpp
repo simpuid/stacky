@@ -1,8 +1,10 @@
 #include <graph.hpp>
 #include <visitor.hpp>
 
-Operator::Operator(vector<Operation> operations, unique_ptr<Stack>& target) : operations(operations), target(target) {}
-SetStack::SetStack(unique_ptr<Stack> &stack) : stack(stack){};
+Operator::Operator(vector<Operation> operations, unique_ptr<StackBase>& target) : operations(operations), target(target) {}
+
+SetStack::SetStack(unique_ptr<StackBase> &stack) : stack(stack){};
+
 SetNumber::SetNumber(memseg number) : number(number) {}
 
 void Statement::accept(Visitor &v)
