@@ -47,12 +47,3 @@ class Invert : public Stack
 {
     void push(memseg data);
 };
-
-// special stack which does nothing and can be used to destroy element and exit loops
-class Bin:public StackBase
-{
-    memseg read();
-    void pop();
-    bool isEmpty();
-    void push(memseg data);
-};

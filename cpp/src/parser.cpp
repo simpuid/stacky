@@ -171,7 +171,7 @@ map<string, unique_ptr<StackBase>> generateStackMap(const vector<Token> &token)
     m.insert(pair<string, unique_ptr<StackBase>>("rsft", make_unique<RightShift>()));
     m.insert(pair<string, unique_ptr<StackBase>>("lsft", make_unique<LeftShift>()));
     m.insert(pair<string, unique_ptr<StackBase>>("inv", make_unique<Invert>()));
-    m.insert(pair<string, unique_ptr<StackBase>>("bin", make_unique<Bin>()));
+
     // inserting user defined stacks to the map
     for (auto t : token)
     {

@@ -87,15 +87,3 @@ void Invert::push(memseg data)
 {
     vec.push_back(~data);
 }
-
-// trash bin function(does nothing)
-memseg Bin::read()
-{
-    return 0;
-}
-void Bin::pop() {}
-bool Bin::isEmpty()
-{
-    return true;
-}
-void Bin::push(memseg data) {}
