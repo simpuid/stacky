@@ -7,7 +7,7 @@ memseg Stack::read()
 }
 void Stack::pop()
 {
-    if (vec.size() > 0)
+    if (!isEmpty())
         vec.pop_back();
 }
 bool Stack::isEmpty()

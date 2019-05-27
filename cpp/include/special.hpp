@@ -4,8 +4,7 @@
 // special stack to handle interaction with console
 class Console : public StackBase
 {
-    memseg lastChar;
-    bool empty = true;
+    vector<char> inBuffer;
     memseg read();
     void pop();
     bool isEmpty();

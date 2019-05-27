@@ -6,22 +6,27 @@ using namespace std;
 // console functions
 memseg Console::read()
 {
-    if (empty)
-    {
-        char in;
-        cin >> in;
-        lastChar = in;
-        empty = false;
-    }
-    return (memseg)lastChar;
+    if (!isEmpty())
+        return inBuffer[inBuffer.size() - 1];
+    else
+        return 0;
 }
 void Console::pop()
 {
-    empty = true;
+    inBuffer.pop_back();
 }
 bool Console::isEmpty()
 {
-    return empty;
+    if (inBuffer.size() != 0)
+        return false;
+    char c;
+    if (cin.get(c))
+    {
+        inBuffer.push_back(c);
+        return false;
+    }
+    else
+    return true;
 }
 void Console::push(memseg data)
 {
