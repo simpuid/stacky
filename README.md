@@ -58,7 +58,7 @@ Using an intermediate queue grants us perk to use the same stack as source and t
 
 ### Number Stack
 
-Number stack is a special stack which is always empty. Both operations will create an element holding the value of this stack. Pushing elements to this stack will destroy them because it remains always empty.  
+Number stack is a special stack which is always empty. Both operations will create an element holding the value of this stack.  
 Example-
 
 * `45>A` will put an element valued 45 to stack __A__ and set the source stack to __A__.
@@ -105,6 +105,7 @@ The `+` operator only _copies_ the character from input buffer. __io__ becomes e
 * `lsft` stack. It is same as __rsft__ however the operation it performs is _left shift by one place_.
 * `inv` stack. It is same as __rsft__ however the operation it performs is _bitwise INVERT_(`~`).
 * `int` stack. It performs the same operation as number stack, but as a target it prints the pushed element as unsigned integer.
+* `bin` stack. It is an always empty stack used to destroy elements. Push elements to __bin__ to destroy them.
 
 ## Examples
 
