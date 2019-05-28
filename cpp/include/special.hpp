@@ -46,3 +46,19 @@ class Invert : public Stack
 {
     void push(memseg data);
 };
+
+class Integer:public StackBase
+{
+    memseg read();
+    void pop();
+    bool isEmpty();
+    void push(memseg data);
+};
+
+class Bin:public StackBase
+{
+    memseg read();
+    void pop();
+    bool isEmpty();
+    void push(memseg data);
+};

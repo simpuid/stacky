@@ -1,7 +1,8 @@
 #pragma once
 #include <vector>
+#include <cstdint>
 using namespace std;
-typedef unsigned char memseg;
+typedef uint32_t memseg;
 
 // base class for all stack based object
 class StackBase

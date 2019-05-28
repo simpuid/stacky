@@ -23,8 +23,8 @@ memseg convert(const string &num)
     memseg m{0}, tens{1};
     for (int i = num.length() - 1; i >= 0; i--)
     {
-        m = (m + (tens * (num[i] - '0')) % 256) % 256;
-        tens = (tens * 10) % 256;
+        m = m + (tens * (num[i] - '0'));
+        tens = (tens * 10);
     }
     return m;
 }
@@ -171,6 +171,8 @@ map<string, unique_ptr<StackBase>> generateStackMap(const vector<Token> &token)
     m.insert(pair<string, unique_ptr<StackBase>>("rsft", make_unique<RightShift>()));
     m.insert(pair<string, unique_ptr<StackBase>>("lsft", make_unique<LeftShift>()));
     m.insert(pair<string, unique_ptr<StackBase>>("inv", make_unique<Invert>()));
+    m.insert(pair<string, unique_ptr<StackBase>>("int", make_unique<Integer>()));
+    m.insert(pair<string, unique_ptr<StackBase>>("bin", make_unique<Bin>()));
 
     // inserting user defined stacks to the map
     for (auto t : token)

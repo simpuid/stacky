@@ -26,7 +26,7 @@ bool Console::isEmpty()
         return false;
     }
     else
-    return true;
+        return true;
 }
 void Console::push(memseg data)
 {
@@ -91,4 +91,37 @@ void LeftShift::push(memseg data)
 void Invert::push(memseg data)
 {
     vec.push_back(~data);
+}
+
+// decimal function
+memseg Integer::read()
+{
+    return 0;
+}
+void Integer::pop()
+{
+}
+bool Integer::isEmpty()
+{
+    return true;
+}
+void Integer::push(memseg data)
+{
+    cout << data;
+}
+
+// trash bin
+memseg Bin::read()
+{
+    return 0;
+}
+void Bin::pop()
+{
+}
+bool Bin::isEmpty()
+{
+    return true;
+}
+void Bin::push(memseg data)
+{
 }
