@@ -8,7 +8,7 @@ Stacky is an esoteric programming language involving stacks and only stacks. Eve
 
 ### Memory System
 
-Stacks store everything as element. Each element of the stack is an 8-bit number(0-255 inclusive). Theoretically, stacks can hold an infinite number of elements, and the number of different stacks is also infinite, but due to implementation constraints, the actual capacity can be limited. The interpreter maintains a pointer of a stack. The pointer points to the current source stack.
+Stacks store everything as element. Each element of the stack is an signed 32-bit number. Theoretically, stacks can hold an infinite number of elements, and the number of different stacks is also infinite, but due to implementation constraints, the actual capacity can be limited. The interpreter maintains a pointer of a stack. The pointer points to the current source stack.
 
 ### Operations
 
@@ -27,7 +27,7 @@ Both operations are binary operations, so the syntax was designed to resolve sou
 ### Stack and Number Stack
 
 * Any combination of alphabets `a-z and A-Z` represents a stack of that name.
-* Any combination of numbers `0-9` represents a number stack of that value. Elements are 8-bit in size, so the values are modulo 256.
+* Any combination of numbers `0-9` represents a number stack of that value(Decimal). Elements are 32-bit in size.
 
 ### Rules
 
@@ -62,11 +62,6 @@ Number stack is a special stack which is always empty. Both operations will crea
 Example-
 
 * `45>A` will put an element valued 45 to stack __A__ and set the source stack to __A__.
-
-Since the elements are 8-bit unsigned integers, therefore the last 8-bit of the numbers are stored in the elements.  
-Example-
-
-* `45>A` and `301>A` results the same.
 
 ### Loops
 
@@ -109,7 +104,76 @@ The `+` operator only _copies_ the character from input buffer. __io__ becomes e
 `132>rsft>io` will print _B_ (ascii code `66` which is `132 >> 1`)
 * `lsft` stack. It is same as __rsft__ however the operation it performs is _left shift by one place_.
 * `inv` stack. It is same as __rsft__ however the operation it performs is _bitwise INVERT_(`~`).
+* `int` stack. It performs the same operation as number stack, but as a target it prints the pushed element as unsigned integer.
+
+## Examples
+
+### Hello World
+
+```stacky
+72>io
+101>io  
+108>>io  
+111>io  
+32>io  
+87>io  
+111>io  
+114>io  
+108>io  
+100>io
+```
+
+### Cat Program
+
+```stacky
+io
+{
+    io>io
+}
+```
+
+### Fibonacci Numbers
+
+```stacky
+1>a+b+int10>io
+20>c
+[
+    a>add
+    b>a+add>b
+    a+int
+    10>io
+    c>add
+    0>inv>add>c
+]
+```
+
+### Subtraction
+
+```stacky
+50>>a
+20>>b
+b>inv>add
+1>add
+a>add
+add>c
+
+a>int
+45>io
+b>int
+61>io
+c>int
+```
 
 ## Implementation
 
-The `cpp` directory contains a c++ implementation of the language. Execute makefile `cpp/Makefile` which result in the creation of executable `cpp/program`. Execute it by `./cpp/program <source_file_name>` to start the interpreter.
+The `cpp` directory contains a c++ implementation of the language. Execute makefile  
+`$ make -C ./cpp/`  
+which result in the creation of executable `cpp/program`. Execute it by  
+`$ ./cpp/program "source_file_name"`  
+to start the interpreter.
+
+## Brainfuck2Stacky
+
+The file `converter/converter.py` is a python3 program which converts valid brainfuck code to stacky code. It takes brainfuck code as console input and prints stacky code as console output. Execute  
+`$ python3 ./converter/converter.py < "input_bf_code_file" > "output_stacky_code_file"`  
+Since stacky can simulate brainfuck, therefore it is turing complete.
