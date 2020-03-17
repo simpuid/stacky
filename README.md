@@ -38,7 +38,7 @@ Both operations are binary operations, so the syntax was designed to resolve sou
   1. `C` - Set the source stack pointer to __C__,
   2. `>A` - Perform move(`>`) operation with target __A__ and set the source stack pointer to __A__,
   3. `+B` - Perform copy(`+`) operation with target __B__ and set the source stack pointer to __B__,
-* Staring token of the code should always be a stack or a number stack.  
+* Starting token of the code should always be a stack or a number stack.  
   Example-  
   `{A>B}` is wrong, however `A{A>B}` is correct.
 * Number stack can be only treated as source but never as target.  
